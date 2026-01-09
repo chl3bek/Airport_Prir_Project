@@ -3,6 +3,16 @@ import pandas as pd
 
 API_URL = "http://127.0.0.1:8000"
 
+def login_user(username, password):
+    try:
+        payload = {"username": username, "password": password}
+        res = requests.post(f"{API_URL}/auth/login", json=payload)
+        if res.status_code == 200:
+            return res.json()
+        return None
+    except Exception:
+        return None
+
 def fetch_data(endpoint):
     """Pomocnicza funkcja do pobierania danych (GET)"""
     try:
@@ -38,3 +48,20 @@ def add_passenger(payload):
         return response
     except Exception as e:
         return None
+
+def get_employees():
+    return fetch_data("crew/employees")
+
+def get_flight_crew(lot_id):
+    return fetch_data(f"crew/list/{lot_id}")
+
+def assign_crew(payload):
+    try:
+        response = requests.post(f"{API_URL}/crew/assign", json=payload)
+        return response
+    except Exception as e:
+        return None
+
+def get_technical_reviews():
+    """Pobiera listę przeglądów technicznych"""
+    return fetch_data("machines/reviews")

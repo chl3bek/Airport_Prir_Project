@@ -2,23 +2,33 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
-# To co wysyłamy/odbieramy (baza)
-class FlightBase(BaseModel):
+class RouteInfo(BaseModel):
+    LotniskoOdlotu: str
+    LotniskoPrzylotu: str
+    class Config:
+        from_attributes = True
+
+class AircraftInfo(BaseModel):
+    NumerRejestracyjny: str
+    class Config:
+        from_attributes = True
+
+class StatusInfo(BaseModel):
+    OpisStatusu: str
+    class Config:
+        from_attributes = True
+
+class FlightResponse(BaseModel):
+    LotID: int
     NumerLotu: str
     DataOdlotu: datetime
     PlanowanaDataPrzylotu: datetime
-    StatusID: int
-
-# Do aktualizacji (np. opóźnienie)
-class FlightUpdate(BaseModel):
     RzeczywistaDataOdlotu: Optional[datetime] = None
-    StatusID: Optional[int] = None
-
-# To co widzi użytkownik (odpowiedź API)
-class FlightResponse(FlightBase):
-    LotID: int
-    # Możemy tu dodać nazwy lotnisk, jeśli zrobimy joiny,
-    # ale na start wystarczą podstawowe dane.
     
+    # Relacje z Dużej Litery
+    Trasa: Optional[RouteInfo] = None
+    Samolot: Optional[AircraftInfo] = None
+    Status: Optional[StatusInfo] = None
+
     class Config:
         from_attributes = True

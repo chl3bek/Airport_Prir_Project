@@ -1,8 +1,11 @@
 import streamlit as st
 import api_client
 from datetime import date
+from auth_utils import require_login
 
 st.set_page_config(page_title="Pasażerowie", layout="wide")
+
+require_login()
 
 st.header("👥 Zarządzanie Pasażerami")
 

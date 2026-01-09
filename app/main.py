@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware # <--- IMPORT 1
-from app.routers import passengers, flights
+from app.routers import passengers, flights, auth, crew, machines
 from app.core.database import engine, Base
 
 app = FastAPI(
@@ -33,6 +33,9 @@ async def init_tables():
 
 app.include_router(passengers.router)
 app.include_router(flights.router)
+app.include_router(auth.router)
+app.include_router(crew.router)
+app.include_router(machines.router)
 
 @app.get("/")
 async def root():

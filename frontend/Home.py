@@ -1,27 +1,29 @@
 import streamlit as st
+import api_client
+import time
 
-st.set_page_config(
-    page_title="Airport Manager",
-    page_icon="✈️",
-    layout="wide"
-)
+st.set_page_config(page_title="Airport Manager", layout="wide")
 
-st.title("✈️ System Zarządzania Lotniskiem")
+if 'user' not in st.session_state:
+    st.session_state['user'] = None
 
-st.markdown("""
-### Witamy w panelu administracyjnym.
-Aplikacja została zbudowana w architekturze mikroserwisów.
-            
-**Wybierz moduł z menu po lewej stronie:**
-- **Tablica Lotów**: Podgląd bieżących operacji lotniczych.
-- **Pasażerowie**: Zarządzanie bazą klientów i rezerwacjami.
-
----
-*Status systemu:* 🟢 **Online** (Połączono z API: http://127.0.0.1:8000)
-""")
-
-# Opcjonalnie: dashboard ze statystykami
-col1, col2, col3 = st.columns(3)
-col1.metric("Liczba Lotów Dzisiaj", "12", "+2")
-col2.metric("Odprawieni Pasażerowie", "1,240", "-5%")
-col3.metric("Opóźnienia", "3", "Uwaga")
+# --- EKRAN LOGOWANIA ---
+if not st.session_state['user']:
+    st.title("✈️ Logowanie do Systemu")
+    with st.form("login"):
+        user = st.text_input("Login")
+        pwd = st.text_input("Hasło", type="password")
+        if st.form_submit_button("Zaloguj"):
+            data = api_client.login_user(user, pwd)
+            if data:
+                st.session_state['user'] = data
+                st.success("Zalogowano!")
+                time.sleep(0.5)
+                st.rerun()
+            else:
+                st.error("Błąd logowania")
+else:
+    # --- DASHBOARD (widoczny po zalogowaniu) ---
+    st.sidebar.button("Wyloguj", on_click=lambda: st.session_state.update(user=None))
+    st.title(f"Witaj, {st.session_state['user']['imie']}!")
+    st.info("Wybierz moduł z menu po lewej stronie.")
