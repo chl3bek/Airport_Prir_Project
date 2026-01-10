@@ -19,7 +19,6 @@ AsyncSessionLocal = async_sessionmaker(bind=engine, class_=AsyncSession, expire_
 class Base(DeclarativeBase):
     pass
 
-# --- TO JEST CZĘŚĆ, KTÓREJ BRAKUJE ---
 async def get_db():
     async with AsyncSessionLocal() as session:
         yield session

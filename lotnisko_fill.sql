@@ -483,7 +483,7 @@ INSERT INTO Loty (LotID, NumerLotu, TrasaID, SamolotID, DataOdlotu, PlanowanaDat
 (1098, 'LO098', 21, 15, '2025-12-29 09:00:00', '2025-12-29 09:50:00', NULL, NULL, 5),
 (1099, 'LO099', 60, 24, '2025-12-29 15:00:00', '2025-12-29 16:00:00', NULL, NULL, 5),
 (1100, 'LO100', 91, 5, '2025-12-29 23:00:00', '2025-12-30 15:00:00', NULL, NULL, 5),
-(1101, 'LO101', 3, 31, '2025-12-30 10:00:00', '2025-12-30 12:15:00', NULL, NULL, 5);
+(1101, 'LO101', 3, 31, '2025-12-30 10:00:00', '2025-12-30 12:15:00', NULL, NULL, 5),
 (1102, 'LO102', 4, 12, '2025-12-30 06:00:00', '2025-12-30 07:45:00', '2025-12-30 06:05:00', '2025-12-30 07:50:00', 4),
 (1103, 'LO103', 82, 4, '2025-12-30 10:00:00', '2025-12-30 18:00:00', '2025-12-30 10:15:00', '2025-12-30 18:25:00', 4),
 (1104, 'LO104', 15, 20, '2025-12-30 12:00:00', '2025-12-30 15:30:00', '2025-12-30 12:00:00', '2025-12-30 15:20:00', 4),
@@ -735,7 +735,7 @@ INSERT INTO Pasazerowie (PasazerID, Imie, Nazwisko, DataUrodzenia, Email) VALUES
 (2047, 'Michał', 'Włodarczyk', '1977-03-27', 'michal.wlodarczyk@example.com'),
 (2048, 'Nadia', 'Krzemińska', '1991-04-28', 'nadia.krzeninska@example.com'),
 (2049, 'Oskar', 'Jasiński', '1982-05-29', 'oskar.jasinski@example.com'),
-(2050, 'Patrycja', 'Mazurek', '1998-06-30', 'patrycja.mazurek@example.com');
+(2050, 'Patrycja', 'Mazurek', '1998-06-30', 'patrycja.mazurek@example.com'),
 (2051, 'Sebastian', 'Dudek', '1983-05-14', 'sebastian.dudek@example.com'),
 (2052, 'Marta', 'Zajkowska', '1995-11-20', 'marta.zajkowska@example.pl'),
 (2053, 'Krzysztof', 'Pawłowski', '1976-02-10', 'krzysztof.pawlowski@poczta.fm'),
@@ -1617,4 +1617,4 @@ INSERT INTO PrzegladyTechniczne (PrzegladID, MaszynaID, DataPrzegladu, DataNaste
 (8025, 7020, '2025-12-10', '2026-06-10', 'Pozytywny', 4051),
 (8026, 7023, '2025-12-11', '2026-06-11', 'Pozytywny', 4052),
 (8027, 7024, '2025-12-12', '2026-06-12', 'Pozytywny', 4053),
-(8028, 7001, '2025-04-01', '2025-10-01', 'Pozytywny', 4
+(8028, 7001, '2025-04-01', '2025-10-01', 'Pozytywny', 4);
