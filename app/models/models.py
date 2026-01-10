@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.core.database import Base
 from datetime import datetime, date
 from typing import Optional
+from sqlalchemy import UniqueConstraint
 
 # 1. Modele Samolotow
 class AircraftModel(Base):
@@ -119,14 +120,17 @@ class FlightCrew(Base):
     ZalogaLotuID: Mapped[int] = mapped_column(Integer, primary_key=True)
 
     # Oznaczamy OBA pola jako primary_key -> to tworzy klucz złożony
-    LotID: Mapped[int] = mapped_column(ForeignKey("Loty.LotID"), primary_key=True)
-    PracownikID: Mapped[int] = mapped_column(ForeignKey("Pracownicy.PracownikID"), primary_key=True)
+    LotID: Mapped[int] = mapped_column(ForeignKey("Loty.LotID"))
+    PracownikID: Mapped[int] = mapped_column(ForeignKey("Pracownicy.PracownikID"))
     
     RolaWLocie: Mapped[str] = mapped_column(String(50)) # np. "Kapitan"
 
     # Relacje (niezbędne, żeby wyświetlić imię i nazwisko we Frontendzie)
     PracownikRef: Mapped["Employee"] = relationship("Employee")
     LotRef: Mapped["Flight"] = relationship("Flight")
+    __table_args__ = (
+        UniqueConstraint("LotID", "PracownikID", name="uq_lot_pracownik"),
+    )
 
 # 12. Typy Maszyn
 class MachineType(Base):
