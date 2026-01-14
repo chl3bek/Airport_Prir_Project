@@ -10,7 +10,7 @@ require_login()
 st.header("Tablica Odlotów i Przylotów")
 col1, col2 = st.columns([1, 5])
 with col1:
-    if st.button("🔄 Odśwież dane"):
+    if st.button("Odśwież dane"):
         st.cache_data.clear()
         st.rerun()
 
@@ -129,7 +129,7 @@ if raw_flights is not None and len(raw_flights) > 0:
     col_p1, col_p2, col_p3 = st.columns([1, 2, 1])
     
     with col_p1:
-        if st.button("⬅️ Poprzednia", disabled=(st.session_state.page_number == 0)):
+        if st.button("Poprzednia", disabled=(st.session_state.page_number == 0)):
             st.session_state.page_number -= 1
             st.rerun()
             
@@ -143,7 +143,7 @@ if raw_flights is not None and len(raw_flights) > 0:
         )
         
     with col_p3:
-        if st.button("Następna ➡️", disabled=(st.session_state.page_number == total_pages - 1)):
+        if st.button("Następna", disabled=(st.session_state.page_number == total_pages - 1)):
             st.session_state.page_number += 1
             st.rerun()
 

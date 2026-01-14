@@ -6,7 +6,7 @@ from auth_utils import require_login
 st.set_page_config(page_title="Zarządzanie Załogą", layout="wide")
 require_login()
 
-st.header("👨‍✈️ Zarządzanie Załogą Lotniczą")
+st.header("Zarządzanie Załogą Lotniczą")
 
 # --- 1. WYBÓR LOTU ---
 df_flights = api_client.get_flights()

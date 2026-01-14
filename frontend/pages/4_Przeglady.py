@@ -7,7 +7,7 @@ from auth_utils import require_login
 st.set_page_config(page_title="Przeglądy Techniczne", layout="wide")
 require_login()
 
-st.header("🔧 Przeglądy Techniczne Pojazdów")
+st.header("Przeglądy Techniczne Pojazdów")
 st.caption("Podgląd statusu maszyn obsługi naziemnej (GSE) z podziałem na kategorie.")
 
 # 1. Pobranie danych

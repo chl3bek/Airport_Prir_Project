@@ -21,11 +21,7 @@ def require_login():
     
     with st.sidebar:
         st.title("Panel Użytkownika")
-        st.write(f"👤 **{user['username']}**")
-        
-        # Ikona w zależności od roli
-        role_icon = "🔐" if user['role'] == 'admin' else "✈️"
-        st.caption(f"{role_icon} Rola: {user['role'].upper()}")
+        st.write(f"**{user['username']}**")
         
         # Wyświetlanie Imienia i Nazwiska (jeśli są dostępne)
         if user.get('imie') and user.get('nazwisko'):
@@ -34,7 +30,7 @@ def require_login():
         st.divider()
         
         # 3. Przycisk Wylogowania
-        if st.button("🚪 Wyloguj się", type="primary", use_container_width=True):
+        if st.button("Wyloguj się", type="primary", use_container_width=True):
             st.session_state['user'] = None 
             st.success("Wylogowano pomyślnie!")
             time.sleep(0.5)

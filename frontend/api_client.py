@@ -14,7 +14,6 @@ def login_user(username, password):
         return None
 
 def fetch_data(endpoint):
-    """Pomocnicza funkcja do pobierania danych (GET)"""
     try:
         response = requests.get(f"{API_URL}/{endpoint}/")
         if response.status_code == 200:
@@ -41,7 +40,6 @@ def get_passengers():
     return pd.DataFrame()
 
 def add_passenger(payload):
-    """Wysyłanie danych (POST)"""
     try:
         response = requests.post(f"{API_URL}/passengers/", json=payload)
         return response
@@ -62,5 +60,4 @@ def assign_crew(payload):
         return None
 
 def get_technical_reviews():
-    """Pobiera listę przeglądów technicznych"""
     return fetch_data("machines/reviews")

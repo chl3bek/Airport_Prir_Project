@@ -7,9 +7,9 @@ st.set_page_config(page_title="Pasażerowie", layout="wide")
 
 require_login()
 
-st.header("👥 Zarządzanie Pasażerami")
+st.header("Zarządzanie Pasażerami")
 
-tab1, tab2 = st.tabs(["📋 Lista Pasażerów", "Dodaj Nowego"])
+tab1, tab2 = st.tabs(["Lista Pasażerów", "Dodaj Nowego"])
 
 with tab1:
     if st.button("Odśwież listę"):
