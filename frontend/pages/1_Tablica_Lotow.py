@@ -5,12 +5,9 @@ import pandas as pd
 
 st.set_page_config(page_title="Tablica Lotów", layout="wide")
 
-# Wymagane logowanie
 require_login()
 
-st.header("🛫 Tablica Odlotów i Przylotów")
-
-# Przycisk odświeżania
+st.header("Tablica Odlotów i Przylotów")
 col1, col2 = st.columns([1, 5])
 with col1:
     if st.button("🔄 Odśwież dane"):
@@ -18,16 +15,10 @@ with col1:
         st.rerun()
 
 # 1. POBIERANIE DANYCH
-# Pobieramy wszystko, a filtrowanie i stronicowanie zrobimy tutaj (bezpieczniej)
 raw_flights = api_client.get_flights()
 
 if raw_flights is not None and len(raw_flights) > 0:
-    # Konwersja na DataFrame
     df_flights = pd.DataFrame(raw_flights)
-
-    # --- PRZETWARZANIE DANYCH ---
-    
-    # Wyciąganie danych z zagnieżdżonych słowników (Trasa, Samolot, Status)
     if 'Trasa' in df_flights.columns:
         df_flights['Lotnisko_Start'] = df_flights['Trasa'].apply(
             lambda x: x.get('LotniskoOdlotu', '') if isinstance(x, dict) else ''
@@ -75,29 +66,21 @@ if raw_flights is not None and len(raw_flights) > 0:
             options=unique_statuses,
             default=unique_statuses
         )
-
-    # Logika filtrowania
     filtered_df = df_flights.copy()
 
-    # A. Filtr nr lotu
     if search_flight:
         filtered_df = filtered_df[filtered_df['NumerLotu'].str.contains(search_flight, case=False, na=False)]
 
-    # B. Filtr lotniska (Start LUB Cel)
     if search_airport:
         mask_start = filtered_df['Lotnisko_Start'].str.contains(search_airport, case=False, na=False)
         mask_cel = filtered_df['Lotnisko_Cel'].str.contains(search_airport, case=False, na=False)
         filtered_df = filtered_df[mask_start | mask_cel]
 
-    # C. Filtr statusu
     if status_filter:
         filtered_df = filtered_df[filtered_df['Status_Nazwa'].isin(status_filter)]
 
     # --- 3. PAGINACJA (100 NA STRONĘ) ---
     ITEMS_PER_PAGE = 100
-    
-    # Reset numeru strony, jeśli zmieniliśmy filtry
-    # Tworzymy unikalny podpis filtrów
     current_filter_sig = f"{search_flight}_{search_airport}_{len(status_filter)}"
     
     if 'last_filter_sig' not in st.session_state:
@@ -108,18 +91,15 @@ if raw_flights is not None and len(raw_flights) > 0:
         st.session_state.page_number = 0
         st.session_state.last_filter_sig = current_filter_sig
 
-    # Obliczenia stron
     total_rows = len(filtered_df)
     total_pages = max(1, (total_rows // ITEMS_PER_PAGE) + (1 if total_rows % ITEMS_PER_PAGE > 0 else 0))
-    
-    # Zabezpieczenie przed wyjściem poza zakres
+
     if st.session_state.page_number >= total_pages:
         st.session_state.page_number = total_pages - 1
 
     start_idx = st.session_state.page_number * ITEMS_PER_PAGE
     end_idx = start_idx + ITEMS_PER_PAGE
-    
-    # Wycinamy kawałek danych do wyświetlenia
+
     display_df = filtered_df.iloc[start_idx:end_idx].copy()
 
     # --- 4. WYŚWIETLANIE TABELI ---

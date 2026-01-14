@@ -58,8 +58,7 @@ class Flight(Base):
     PlanowanaDataPrzylotu: Mapped[datetime] = mapped_column(DateTime)
     RzeczywistaDataOdlotu: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
     RzeczywistaDataPrzylotu: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
-    
-   # --- RELACJE ---
+
     Trasa: Mapped["Route"] = relationship("Route")
     Samolot: Mapped["Aircraft"] = relationship("Aircraft")
     Status: Mapped["FlightStatus"] = relationship("FlightStatus")
@@ -81,18 +80,15 @@ class Booking(Base):
     LotID: Mapped[int] = mapped_column(ForeignKey("Loty.LotID"))
     PasazerID: Mapped[int] = mapped_column(ForeignKey("Pasazerowie.PasazerID"))
     
-    # ZMIANA: Dodajemy nullable=True, żeby SQL nie wyrzucał błędu o brakujących danych
     DataRezerwacji: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
     StatusRezerwacji: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     Klasa: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     
     NumerMiejsca: Mapped[str] = mapped_column(String(5))
 
-    # Relacje
     LotRef: Mapped["Flight"] = relationship("Flight")
     PasazerRef: Mapped["Passenger"] = relationship("Passenger")
 
-# --- NOWE TABELE (HR i Techniczne) ---
 
 # 9. Typy Pracownikow
 class EmployeeType(Base):
@@ -109,7 +105,6 @@ class Employee(Base):
     TypID: Mapped[int] = mapped_column(ForeignKey("TypyPracownikow.TypID"))
     DataZatrudnienia: Mapped[date] = mapped_column(Date)
     NumerLicencji: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
-# Relacja do typu (żeby pobrać nazwę stanowiska)
     Typ: Mapped["EmployeeType"] = relationship("EmployeeType")
 
 
@@ -119,13 +114,11 @@ class FlightCrew(Base):
     
     ZalogaLotuID: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    # Oznaczamy OBA pola jako primary_key -> to tworzy klucz złożony
     LotID: Mapped[int] = mapped_column(ForeignKey("Loty.LotID"))
     PracownikID: Mapped[int] = mapped_column(ForeignKey("Pracownicy.PracownikID"))
     
-    RolaWLocie: Mapped[str] = mapped_column(String(50)) # np. "Kapitan"
+    RolaWLocie: Mapped[str] = mapped_column(String(50)) 
 
-    # Relacje (niezbędne, żeby wyświetlić imię i nazwisko we Frontendzie)
     PracownikRef: Mapped["Employee"] = relationship("Employee")
     LotRef: Mapped["Flight"] = relationship("Flight")
     __table_args__ = (
@@ -146,14 +139,11 @@ class GroundMachine(Base):
     NumerInwentarzowy: Mapped[str] = mapped_column(String(50), unique=True)
     TypMaszynyID: Mapped[int] = mapped_column(ForeignKey("TypyMaszyn.TypMaszynyID"))
     
-    # --- e ---
     Marka: Mapped[Optional[str]] = mapped_column(String(50))
     Model: Mapped[Optional[str]] = mapped_column(String(50))
     RokProdukcji: Mapped[Optional[int]] = mapped_column(Integer)
     Status: Mapped[Optional[str]] = mapped_column(String(50), default='Dostępna')
 
-    # --- RELACJA ---
-    # Dzięki temu pobierzemy nazwę typu (np. "Cysterna")
     Typ: Mapped["MachineType"] = relationship("MachineType")
 
 # 14. Przeglady Techniczne
@@ -164,12 +154,10 @@ class TechnicalReview(Base):
     DataPrzegladu: Mapped[date] = mapped_column(Date)
     DataNastepnegoPrzegladu: Mapped[Optional[date]] = mapped_column(Date)
     Wynik: Mapped[str] = mapped_column(String(100))
-    
-    # --- e ---
+
     PrzeprowadzajacyPracownikID: Mapped[Optional[int]] = mapped_column(ForeignKey("Pracownicy.PracownikID"))
     Uwagi: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    # --- RELACJA ---
-    # Dzięki temu pobierzemy numer inwentarzowy maszyny
+
     Maszyna: Mapped["GroundMachine"] = relationship("GroundMachine")
 # 15. Użytkownicy Systemu
 class User(Base):
@@ -178,9 +166,8 @@ class User(Base):
     UserID: Mapped[int] = mapped_column(Integer, primary_key=True)
     Username: Mapped[str] = mapped_column(String(50), unique=True)
     PasswordHash: Mapped[str] = mapped_column(String(255))
-    Role: Mapped[str] = mapped_column(String(20), default="employee") # 'admin' lub 'employee'
-    
-    # Dodajemy nowe pola:
+    Role: Mapped[str] = mapped_column(String(20), default="employee") 
+
     Imie: Mapped[str] = mapped_column(String(50), nullable=True)
     Nazwisko: Mapped[str] = mapped_column(String(50), nullable=True)
     IsActive: Mapped[bool] = mapped_column(Boolean, default=True)

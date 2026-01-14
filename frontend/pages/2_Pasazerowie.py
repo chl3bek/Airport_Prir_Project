@@ -9,7 +9,7 @@ require_login()
 
 st.header("👥 Zarządzanie Pasażerami")
 
-tab1, tab2 = st.tabs(["📋 Lista Pasażerów", "➕ Dodaj Nowego"])
+tab1, tab2 = st.tabs(["📋 Lista Pasażerów", "Dodaj Nowego"])
 
 with tab1:
     if st.button("Odśwież listę"):
@@ -54,11 +54,11 @@ with tab2:
                 response = api_client.add_passenger(payload)
                 
                 if response and response.status_code == 200:
-                    st.success(f"✅ Dodano pasażera: {imie} {nazwisko}")
-                    st.balloons() # Efekt specjalny ;)
+                    st.success(f"Dodano pasażera: {imie} {nazwisko}")
+                    st.balloons() 
                 elif response:
-                    st.error(f"❌ Błąd API: {response.text}")
+                    st.error(f"Błąd API: {response.text}")
                 else:
-                    st.error("❌ Błąd połączenia z serwerem.")
+                    st.error("Błąd połączenia z serwerem.")
             else:
-                st.warning("⚠️ Wypełnij wszystkie pola!")
+                st.warning("Wypełnij wszystkie pola!")

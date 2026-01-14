@@ -18,7 +18,6 @@ if not reviews_data:
     st.stop()
 
 # 2. Przetworzenie danych do Pandas DataFrame
-# Musimy "spłaszczyć" zagnieżdżony JSON, żeby mieć kolumnę "Kategoria"
 flat_data = []
 for r in reviews_data:
     maszyna = r['Maszyna']
@@ -26,7 +25,7 @@ for r in reviews_data:
     
     flat_data.append({
         "ID Przeglądu": r['PrzegladID'],
-        "Kategoria": typ['NazwaTypu'], # To będzie klucz do zakładek!
+        "Kategoria": typ['NazwaTypu'],
         "Pojazd (Nr Inw.)": maszyna['NumerInwentarzowy'],
         "Data Przeglądu": r['DataPrzegladu'],
         "Wynik": r['Wynik'],
@@ -38,16 +37,13 @@ for r in reviews_data:
 df = pd.DataFrame(flat_data)
 
 # 3. Dynamiczne tworzenie zakładek na podstawie Kategorii
-# Pobieramy unikalne kategorie z danych (np. ["Cysterna", "Schody", "Holownik"])
 kategorie = sorted(df['Kategoria'].unique())
-
-# Tworzymy zakładkę "Wszystkie" + po jednej dla każdej kategorii
-tabs = st.tabs(["📋 Wszystkie"] + kategorie)
+tabs = st.tabs(["Wszystkie"] + kategorie)
 
 # --- ZAKŁADKA 1: WSZYSTKIE ---
 with tabs[0]:
     st.dataframe(
-        df.drop(columns=["Kategoria"]), # Tu kategoria jest zbędna w tabeli
+        df.drop(columns=["Kategoria"]), 
         use_container_width=True,
         hide_index=True,
         column_config={
@@ -56,13 +52,10 @@ with tabs[0]:
         }
     )
 
-# --- POZOSTAŁE ZAKŁADKI (Dynamiczne) ---
+# --- POZOSTAŁE ZAKŁADKI ---
 for i, kategoria in enumerate(kategorie):
-    with tabs[i + 1]: # +1 bo zerowa to "Wszystkie"
-        # Filtrujemy dane tylko dla tej kategorii
+    with tabs[i + 1]: 
         subset = df[df['Kategoria'] == kategoria]
-        
-        # Wyświetlamy statystyki dla danej grupy
         col1, col2 = st.columns(2)
         total = len(subset)
         failed = len(subset[subset['Wynik'] == 'Negatywny'])

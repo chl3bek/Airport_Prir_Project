@@ -5,13 +5,12 @@ class UserLogin(BaseModel):
     username: str
     password: str
 
-# Nowy schemat do tworzenia użytkownika
 class UserCreate(BaseModel):
     username: str
     password: str
     imie: str
     nazwisko: str
-    role: str = "employee" # Domyślnie pracownik
+    role: str = "employee" 
 
 class UserResponse(BaseModel):
     id: int

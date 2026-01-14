@@ -10,7 +10,6 @@ router = APIRouter(tags=["Authentication"])
 
 @router.post("/auth/login", response_model=UserResponse)
 async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
-    # Szukamy użytkownika
     result = await db.execute(select(User).where(User.Username == user_data.username))
     user = result.scalars().first()
 
@@ -24,7 +23,6 @@ async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
 
 @router.post("/auth/register", response_model=UserResponse)
 async def register_user(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
-    # Sprawdzamy czy login zajęty
     result = await db.execute(select(User).where(User.Username == user_data.username))
     if result.scalars().first():
         raise HTTPException(status_code=400, detail="Użytkownik istnieje")

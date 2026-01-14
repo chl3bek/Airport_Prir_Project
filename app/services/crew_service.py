@@ -28,12 +28,10 @@ class CrewService:
             
         except IntegrityError as e:
             await self.repo.db.rollback()
-            # --- ZMIANA: WYPISUJEMY PRAWDZIWY BŁĄD DO KONSOLI I ZWRACAMY GO ---
-            print(f"CRITICAL DB ERROR: {e.orig}")  # To pokaże się w terminalu backendu
+            print(f"CRITICAL DB ERROR: {e.orig}") 
             
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
-                # Zwracamy surowy błąd bazy danych, żeby zobaczyć co go boli
                 detail=f"Błąd integralności danych: {str(e.orig)}"
             )
         except Exception as e:

@@ -9,7 +9,7 @@ if 'user' not in st.session_state:
 
 # --- EKRAN LOGOWANIA ---
 if not st.session_state['user']:
-    st.title("✈️ Logowanie do Systemu")
+    st.title("Logowanie do Systemu")
     with st.form("login"):
         user = st.text_input("Login")
         pwd = st.text_input("Hasło", type="password")

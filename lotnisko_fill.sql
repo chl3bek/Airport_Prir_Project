@@ -137,7 +137,6 @@ INSERT INTO Samoloty (SamolotID, NumerRejestracyjny, ModelID, DataWprowadzeniaDo
 
 -- 3. Lotniska (100 wierszy)
 INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
--- Polska
 ('WAW', 'Lotnisko Chopina', 'Warszawa', 'Polska'),
 ('KRK', 'Kraków Airport im. Jana Pawła II', 'Kraków', 'Polska'),
 ('GDN', 'Port Lotniczy Gdańsk im. Lecha Wałęsy', 'Gdańsk', 'Polska'),
@@ -149,8 +148,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('LUZ', 'Port Lotniczy Lublin', 'Lublin', 'Polska'),
 ('BZG', 'Port Lotniczy Bydgoszcz', 'Bydgoszcz', 'Polska'),
 ('WMI', 'Port Lotniczy Warszawa-Modlin', 'Nowy Dwór Mazowiecki', 'Polska'),
-
--- Europa Zachodnia i Centralna
 ('LHR', 'Heathrow Airport', 'Londyn', 'Wielka Brytania'),
 ('LGW', 'Gatwick Airport', 'Londyn', 'Wielka Brytania'),
 ('STN', 'Stansted Airport', 'Londyn', 'Wielka Brytania'),
@@ -166,8 +163,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('VIE', 'Vienna International Airport', 'Wiedeń', 'Austria'),
 ('PRG', 'Václav Havel Airport', 'Praga', 'Czechy'),
 ('BUD', 'Ferenc Liszt International Airport', 'Budapeszt', 'Węgry'),
-
--- Europa Południowa
 ('MAD', 'Adolfo Suárez Madrid-Barajas', 'Madryt', 'Hiszpania'),
 ('BCN', 'El Prat Airport', 'Barcelona', 'Hiszpania'),
 ('AGP', 'Málaga Airport', 'Malaga', 'Hiszpania'),
@@ -182,8 +177,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('HER', 'Heraklion Airport', 'Heraklion', 'Grecja'),
 ('MLA', 'Malta International Airport', 'Luqa', 'Malta'),
 ('LCA', 'Larnaca International Airport', 'Larnaka', 'Cypr'),
-
--- Europa Północna i Wschodnia
 ('CPH', 'Copenhagen Airport', 'Kopenhaga', 'Dania'),
 ('ARN', 'Arlanda Airport', 'Sztokholm', 'Szwecja'),
 ('OSL', 'Gardermoen Airport', 'Oslo', 'Norwegia'),
@@ -197,8 +190,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('IST', 'Istanbul Airport', 'Stambuł', 'Turcja'),
 ('SAW', 'Sabiha Gökçen', 'Stambuł', 'Turcja'),
 ('AYT', 'Antalya Airport', 'Antalya', 'Turcja'),
-
--- Azja Zachodnia (Bliski Wschód i Kaukaz)
 ('DXB', 'Dubai International', 'Dubaj', 'Zjednoczone Emiraty Arabskie'),
 ('AUH', 'Zayed International Airport', 'Abu Zabi', 'Zjednoczone Emiraty Arabskie'),
 ('DOH', 'Hamad International', 'Doha', 'Katar'),
@@ -213,8 +204,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('GYD', 'Heydar Aliyev Airport', 'Baku', 'Azerbejdżan'),
 ('TBS', 'Tbilisi International', 'Tbilisi', 'Gruzja'),
 ('EVN', 'Zvartnots International', 'Erywań', 'Armenia'),
-
--- Afryka Północna
 ('CAI', 'Cairo International', 'Kair', 'Egipt'),
 ('HRG', 'Hurghada International', 'Hurghada', 'Egipt'),
 ('SSH', 'Sharm El Sheikh International', 'Szarm el-Szejk', 'Egipt'),
@@ -225,8 +214,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('TUN', 'Tunis-Carthage', 'Tunis', 'Tunezja'),
 ('DJE', 'Djerba–Zarzis', 'Dżerba', 'Tunezja'),
 ('ALG', 'Houari Boumediene', 'Algier', 'Algieria'),
-
--- Wschodnie Wybrzeże Ameryki Północnej (USA i Kanada)
 ('JFK', 'John F. Kennedy International', 'Nowy Jork', 'USA'),
 ('EWR', 'Newark Liberty', 'Newark', 'USA'),
 ('LGA', 'LaGuardia', 'Nowy Jork', 'USA'),
@@ -244,8 +231,6 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 ('YUL', 'Montréal-Trudeau', 'Montreal', 'Kanada'),
 ('YOW', 'Ottawa Macdonald-Cartier', 'Ottawa', 'Kanada'),
 ('YHZ', 'Halifax Stanfield', 'Halifax', 'Kanada'),
-
--- 10 Lotnisk z Dalszych Regionów 
 ('LAX', 'Los Angeles International', 'Los Angeles', 'USA'),
 ('SFO', 'San Francisco International', 'San Francisco', 'USA'),
 ('ORD', 'OHare International', 'Chicago', 'USA'),
@@ -260,9 +245,7 @@ INSERT INTO Lotniska (KodLotniska, Nazwa, Miasto, Kraj) VALUES
 -- 4. Trasy (95 wierszy)
 INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 
--- --- 80 TRAS KRÓTKO I ŚREDNIO DYSTANSOWYCH ---
-
--- Połączenia z Polski (LOT / Low Cost)
+(1, 'WAW', 'KTW'), -- Warszawa - Katowice
 (2, 'WAW', 'LHR'), -- Warszawa - Londyn Heathrow
 (3, 'WAW', 'CDG'), -- Warszawa - Paryż
 (4, 'WAW', 'FRA'), -- Warszawa - Frankfurt
@@ -292,8 +275,6 @@ INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 (28, 'WRO', 'WAW'), -- Wrocław - Warszawa
 (29, 'POZ', 'WAW'), -- Poznań - Warszawa
 (30, 'RZE', 'WAW'), -- Rzeszów - Warszawa
-
--- Główne trasy europejskie (Hub-to-Hub)
 (31, 'LHR', 'CDG'), -- Londyn - Paryż
 (32, 'LHR', 'FRA'), -- Londyn - Frankfurt
 (33, 'LHR', 'AMS'), -- Londyn - Amsterdam
@@ -309,8 +290,6 @@ INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 (43, 'MUC', 'VCE'), -- Monachium - Wenecja
 (44, 'BER', 'LHR'), -- Berlin - Londyn
 (45, 'BER', 'CDG'), -- Berlin - Paryż
-
--- Południe Europy i Wakacyjne
 (46, 'MAD', 'LIS'), -- Madryt - Lizbona
 (47, 'MAD', 'OPO'), -- Madryt - Porto
 (48, 'BCN', 'LGW'), -- Barcelona - Londyn Gatwick
@@ -322,8 +301,6 @@ INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 (54, 'IST', 'DXB'), -- Stambuł - Dubaj
 (55, 'AYT', 'WAW'), -- Antalya - Warszawa
 (56, 'AYT', 'BER'), -- Antalya - Berlin
-
--- Skandynawia i Bałtyki
 (57, 'CPH', 'ARN'), -- Kopenhaga - Sztokholm
 (58, 'ARN', 'OSL'), -- Sztokholm - Oslo
 (59, 'OSL', 'KEF'), -- Oslo - Reykjavik
@@ -331,8 +308,6 @@ INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 (61, 'RIGA', 'WAW'), -- Ryga - Warszawa
 (62, 'VNO', 'WAW'), -- Wilno - Warszawa
 (63, 'TLL', 'HEL'), -- Tallinn - Helsinki
-
--- Bliski Wschód i Afryka Północna (Średni dystans)
 (64, 'LHR', 'DXB'), -- Londyn - Dubaj
 (65, 'CDG', 'DXB'), -- Paryż - Dubaj
 (66, 'FRA', 'DXB'), -- Frankfurt - Dubaj
@@ -351,10 +326,6 @@ INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 (79, 'DXB', 'BAH'), -- Dubaj - Bahrajn
 (80, 'DXB', 'DOH'), -- Dubaj - Doha
 (81, 'AUH', 'LHR'), -- Abu Zabi - Londyn
-
--- --- 15 TRAS DŁUGODYSTANSOWYCH ---
-
--- Transatlantyckie
 (82, 'LHR', 'JFK'), -- Londyn - Nowy Jork
 (83, 'LHR', 'LAX'), -- Londyn - Los Angeles
 (84, 'CDG', 'JFK'), -- Paryż - Nowy Jork
@@ -364,8 +335,6 @@ INSERT INTO Trasy (TrasaID, LotniskoOdlotu, LotniskoPrzylotu) VALUES
 (88, 'WAW', 'YYZ'), -- Warszawa - Toronto
 (89, 'WAW', 'MIA'), -- Warszawa - Miami
 (90, 'WAW', 'NRT'), -- Warszawa - Tokio Narita
-
--- Azja, Australia i Ameryka Płd.
 (91, 'FRA', 'SIN'), -- Frankfurt - Singapur
 (92, 'LHR', 'SIN'), -- Londyn - Singapur
 (93, 'DXB', 'SYD'), -- Dubaj - Sydney
@@ -381,9 +350,9 @@ INSERT INTO StatusyLotow (StatusID, OpisStatusu) VALUES
 (4, 'Wylądował'),
 (5, 'Anulowany');
 
--- 6. Loty (300 wierszy - kluczowa tabela)
+-- 6. Loty (300 wierszy)
 INSERT INTO Loty (LotID, NumerLotu, TrasaID, SamolotID, DataOdlotu, PlanowanaDataPrzylotu, RzeczywistaDataOdlotu, RzeczywistaDataPrzylotu, StatusID) VALUES
-(1001, 'LO001', 1, 106, '2025-12-05 08:00:00', '2025-12-05 16:30:00', NULL, NULL, 1), -- WAW-JFK (Planowany)
+(1001, 'LO001', 1, 106, '2025-12-05 08:00:00', '2025-12-05 16:30:00', NULL, NULL, 1),
 (1002, 'LO002', 1, 3, '2025-12-01 12:00:00', '2025-12-01 20:30:00', '2025-12-01 12:05:00', '2025-12-01 20:40:00', 4),
 (1003, 'LO003', 2, 15, '2025-12-01 07:00:00', '2025-12-01 08:30:00', '2025-12-01 07:10:00', '2025-12-01 08:45:00', 4),
 (1004, 'LO004', 3, 22, '2025-12-01 09:00:00', '2025-12-01 11:15:00', '2025-12-01 09:00:00', '2025-12-01 11:10:00', 4),
@@ -684,7 +653,7 @@ INSERT INTO Loty (LotID, NumerLotu, TrasaID, SamolotID, DataOdlotu, PlanowanaDat
 (1299, 'LO299', 9, 36, '2026-03-03 07:00:00', '2026-03-03 08:15:00', NULL, NULL, 1),
 (1300, 'LO300', 60, 24, '2026-03-03 15:00:00', '2026-03-03 16:00:00', NULL, NULL, 1),
 (1301, 'LO301', 93, 2, '2026-03-04 08:00:00', '2026-03-04 22:00:00', NULL, NULL, 1);
--- 7. Pasazerowie (200 wierszy - wymagana duża liczba)
+-- 7. Pasazerowie (200 wierszy)
 INSERT INTO Pasazerowie (PasazerID, Imie, Nazwisko, DataUrodzenia, Email) VALUES
 (2001, 'Anna', 'Kowalska', '1985-05-10', 'anna.kowalska@example.com'),
 (2002, 'Piotr', 'Nowak', '1990-01-15', 'piotr.nowak@example.com'),
@@ -889,7 +858,6 @@ INSERT INTO Pasazerowie (PasazerID, Imie, Nazwisko, DataUrodzenia, Email) VALUES
 
 
 -- 8. Rezerwacje (300 wierszy)
--- Duża liczba rezerwacji dla demonstracji relacji Loty:Pasazerowie
 INSERT INTO Rezerwacje (RezerwacjaID, LotID, PasazerID, NumerMiejsca) VALUES
 (3002, 1001, 2002, '1B'),
 (3003, 1001, 2003, '1C'),
@@ -1324,7 +1292,7 @@ INSERT INTO Pracownicy (PracownikID, Imie, Nazwisko, TypID, DataZatrudnienia, Nu
 (4110, 'Leszek', 'Kurs', 5, '2023-06-20', 'ATC014'),
 (4111, 'Jolanta', 'Podejście', 5, '2024-01-15', 'ATC015');
 
--- 11. ZalogaLotu (220 wierszy - 2-4 pracowników na loty)
+-- 11. ZalogaLotu (220 wierszy)
 INSERT INTO ZalogaLotu (ZalogaLotuID, LotID, PracownikID, RolaWLocie) VALUES
 (5001, 1001, 4001, 'Kapitan'),
 (5002, 1001, 4002, 'Drugi Pilot'),
@@ -1552,7 +1520,7 @@ INSERT INTO ZalogaLotu (ZalogaLotuID, LotID, PracownikID, RolaWLocie) VALUES
 (5224, 1080, 4028, 'Stewardesa'),
 (5225, 1080, 4029, 'Steward');
 
--- 12. TypyMaszyn (Bez zmian - dla kontekstu)
+-- 12. TypyMaszyn (5 wierszy)
 INSERT INTO TypyMaszyn (TypMaszynyID, NazwaTypu, Opis) VALUES
 (6001, 'Wózek Bagażowy', 'Do transportu bagażu między terminalem a samolotem'),
 (6002, 'Cysterna Paliwowa', 'Do tankowania samolotów'),
@@ -1560,7 +1528,7 @@ INSERT INTO TypyMaszyn (TypMaszynyID, NazwaTypu, Opis) VALUES
 (6004, 'Holownik Pchający (Pushback)', 'Do wypychania samolotu ze stanowiska postojowego'),
 (6005, 'Taśmociąg do Ładunku', 'Do załadunku i rozładunku cargo');
 
--- 13. MaszynyObslugiNaziemnej (15 oryginalnych + 10 nowych = 25 wierszy)
+-- 13. MaszynyObslugiNaziemnej (25 wierszy)
 INSERT INTO MaszynyObslugiNaziemnej (MaszynaID, NumerInwentarzowy, TypMaszynyID, Marka, Model, RokProdukcji, Status) VALUES
 (7001, 'BG-001', 6001, 'Toyota', 'Towmaster', 2018, 'Dostępna'),
 (7002, 'BG-002', 6001, 'Toyota', 'Towmaster', 2019, 'W Użyciu'),
@@ -1588,7 +1556,7 @@ INSERT INTO MaszynyObslugiNaziemnej (MaszynaID, NumerInwentarzowy, TypMaszynyID,
 (7024, 'TC-203', 6005, 'Mulag', 'Comet 4', 2021, 'Dostępna'),
 (7025, 'TC-204', 6005, 'Mulag', 'Comet 4', 2022, 'W Naprawie');
 
--- 14. PrzegladyTechniczne (15 oryginalnych + 30 nowych = 45 wierszy)
+-- 14. PrzegladyTechniczne (45 wierszy)
 INSERT INTO PrzegladyTechniczne (PrzegladID, MaszynaID, DataPrzegladu, DataNastepnegoPrzegladu, Wynik, PrzeprowadzajacyPracownikID) VALUES
 (8001, 7001, '2025-10-01', '2026-04-01', 'Pozytywny', 4009),
 (8002, 7004, '2025-11-15', '2026-05-15', 'Wymaga Naprawy', 4010),
@@ -1605,11 +1573,11 @@ INSERT INTO PrzegladyTechniczne (PrzegladID, MaszynaID, DataPrzegladu, DataNaste
 (8013, 7011, '2025-11-20', '2026-05-20', 'Pozytywny', 4009),
 (8014, 7012, '2025-10-25', '2026-04-25', 'Pozytywny', 4010),
 (8015, 7013, '2025-11-30', '2026-05-30', 'Pozytywny', 4011),
-(8016, 7016, '2025-12-01', '2025-12-15', 'Wymaga Naprawy', 4051), -- Typ 6001 (Wózek)
-(8017, 7019, '2025-12-02', '2025-12-16', 'Negatywny', 4052),     -- Typ 6002 (Cysterna)
-(8018, 7021, '2025-12-03', '2025-12-17', 'Wymaga Naprawy', 4053), -- Typ 6003 (Schody)
-(8019, 7022, '2025-12-04', '2025-12-18', 'Negatywny', 4054),     -- Typ 6004 (Holownik)
-(8020, 7025, '2025-12-05', '2025-12-19', 'Wymaga Naprawy', 4055), -- Typ 6005 (Taśmociąg)
+(8016, 7016, '2025-12-01', '2025-12-15', 'Wymaga Naprawy', 4051), 
+(8017, 7019, '2025-12-02', '2025-12-16', 'Negatywny', 4052),    
+(8018, 7021, '2025-12-03', '2025-12-17', 'Wymaga Naprawy', 4053), 
+(8019, 7022, '2025-12-04', '2025-12-18', 'Negatywny', 4054),    
+(8020, 7025, '2025-12-05', '2025-12-19', 'Wymaga Naprawy', 4055), 
 (8021, 7014, '2025-12-06', '2026-06-06', 'Pozytywny', 4056),
 (8022, 7015, '2025-12-07', '2026-06-07', 'Pozytywny', 4009),
 (8023, 7017, '2025-12-08', '2026-06-08', 'Pozytywny', 4010),

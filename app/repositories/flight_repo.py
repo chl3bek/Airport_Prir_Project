@@ -8,7 +8,6 @@ class FlightRepository:
         self.db = db
 
     async def get_all_flights(self):
-        # UWAGA: Używamy Dużych Liter, bo tak są nazwane relacje w models.py
         stmt = (
             select(Flight)
             .options(

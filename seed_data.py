@@ -1,6 +1,6 @@
 import asyncio
 import os
-from datetime import date # <--- DODANO IMPORT DATY
+from datetime import date 
 from sqlalchemy import select, text
 from app.core.database import engine, Base, AsyncSessionLocal
 from app.core.security import get_password_hash
@@ -70,7 +70,6 @@ async def seed_database():
         for emp in employees:
             # Login: imie.nazwisko (np. jan.kowalski)
             login = f"{emp.Imie.lower()}.{emp.Nazwisko.lower()}"
-            # Prosta obsługa duplikatów loginów lub polskich znaków jest pominięta dla uproszczenia
             user = User(
                 Username=login,
                 PasswordHash=get_password_hash("user123"),
@@ -87,7 +86,7 @@ async def seed_database():
         typ_schody = MachineType(TypMaszynyID=2, NazwaTypu="Schody Pasażerskie", Opis="Mobilne schody")
         typ_holownik = MachineType(TypMaszynyID=3, NazwaTypu="Holownik", Opis="Push-back")
         session.add_all([typ_cysterna, typ_schody, typ_holownik])
-        await session.flush() # Zapisujemy, żeby ID były dostępne
+        await session.flush() 
 
         # 2. Konkretne Pojazdy
         m1 = GroundMachine(MaszynaID=1, NumerInwentarzowy="GSE-001", TypMaszynyID=1, Status="Dostępna", Marka="Volvo", Model="FL", RokProdukcji=2019)
@@ -97,7 +96,6 @@ async def seed_database():
         await session.flush()
 
         # 3. Przeglądy Techniczne
-        # Zakładamy, że pracownik ID=3 to mechanik (z danych SQL)
         p1 = TechnicalReview(
             PrzegladID=1, 
             MaszynaID=1, 
@@ -116,7 +114,6 @@ async def seed_database():
         )
         session.add_all([p1, p2])
 
-        # Zapisujemy wszystko
         await session.commit()
         print("✅ Konta i Maszyny utworzone pomyślnie!")
         print("🏁 Połączenie zamknięte.")

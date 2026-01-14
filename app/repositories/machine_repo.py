@@ -1,7 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
-# Ważne: musimy zaimportować GroundMachine, żeby móc po nim nawigować
 from app.models.models import TechnicalReview, GroundMachine
 
 class MachineRepository:
@@ -9,12 +8,11 @@ class MachineRepository:
         self.db = db
 
     async def get_all_reviews(self):
-        # Pobieramy: Przegląd -> Maszyna -> Typ
         stmt = (
             select(TechnicalReview)
             .options(
-                selectinload(TechnicalReview.Maszyna)    # Relacja w TechnicalReview
-                .selectinload(GroundMachine.Typ)         # Relacja w GroundMachine
+                selectinload(TechnicalReview.Maszyna)    
+                .selectinload(GroundMachine.Typ)         
             )
             .order_by(TechnicalReview.DataPrzegladu.desc())
         )

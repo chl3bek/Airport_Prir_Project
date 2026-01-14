@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware # <--- IMPORT 1
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers import passengers, flights, auth, crew, machines
 from app.core.database import engine, Base
 
@@ -9,23 +9,19 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# --- KONFIGURACJA CORS (DODAJ TO) ---
 origins = [
-    "http://localhost:8501", # Port Streamlita (Frontend)
+    "http://localhost:8501", 
     "http://127.0.0.1:8501",
-    "*" # Opcjonalnie: zezwól wszystkim (tylko na dev)
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # W produkcji podaje się konkretne domeny, na dev "*" jest ok
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# ------------------------------------
 
-# Tworzenie tabel przy starcie (tylko dla celów deweloperskich)
 @app.on_event("startup")
 async def init_tables():
     async with engine.begin() as conn:

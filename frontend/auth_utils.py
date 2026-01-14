@@ -11,9 +11,9 @@ def require_login():
     
     # 1. Sprawdzenie czy w sesji istnieje obiekt 'user'
     if 'user' not in st.session_state or st.session_state['user'] is None:
-        st.warning("⛔ Dostęp zabroniony!")
+        st.warning("Dostęp zabroniony!")
         st.info("Musisz się zalogować, aby zobaczyć tę stronę.")
-        st.stop() # Zatrzymuje renderowanie reszty kodu pod spodem
+        st.stop() 
         return
 
     # 2. Wyświetlenie paska bocznego dla zalogowanego użytkownika
@@ -35,7 +35,7 @@ def require_login():
         
         # 3. Przycisk Wylogowania
         if st.button("🚪 Wyloguj się", type="primary", use_container_width=True):
-            st.session_state['user'] = None # Czyścimy użytkownika z sesji
+            st.session_state['user'] = None 
             st.success("Wylogowano pomyślnie!")
             time.sleep(0.5)
-            st.rerun() # Przeładowujemy aplikację (wróci do logowania w Home.py)
+            st.rerun() 

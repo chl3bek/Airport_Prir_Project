@@ -29,7 +29,6 @@ def get_flights():
     data = fetch_data("flights")
     if data:
         df = pd.DataFrame(data)
-        # Formatowanie dat
         df['DataOdlotu'] = pd.to_datetime(df['DataOdlotu']).dt.strftime('%Y-%m-%d %H:%M')
         df['PlanowanaDataPrzylotu'] = pd.to_datetime(df['PlanowanaDataPrzylotu']).dt.strftime('%Y-%m-%d %H:%M')
         return df

@@ -7,9 +7,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Upewnienie się, że URL jest poprawny dla aiosqlite (jeśli w .env jest sqlite:///...)
 if DATABASE_URL and DATABASE_URL.startswith("sqlite"):
-    # Fix dla SQLite, jeśli user wpisał sqlite:// zamiast sqlite+aiosqlite://
     if "aiosqlite" not in DATABASE_URL:
         DATABASE_URL = DATABASE_URL.replace("sqlite://", "sqlite+aiosqlite://")
 

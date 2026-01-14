@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 from datetime import date
 from typing import Optional
 
-# Naprawiamy nazewnictwo: Baza ma "NazwaTypu", Frontend chce "Nazwa"
 class MachineTypeInfo(BaseModel):
     Nazwa: str = Field(..., alias="NazwaTypu") 
     
@@ -23,7 +22,6 @@ class ReviewResponse(BaseModel):
     DataPrzegladu: date
     Wynik: str
     DataNastepnegoPrzegladu: Optional[date]
-    # Dodajemy Uwagi, żeby były widoczne
     Uwagi: Optional[str] = None
     Maszyna: Optional[MachineInfo] = None
 

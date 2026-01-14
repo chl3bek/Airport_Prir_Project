@@ -15,10 +15,8 @@ if df_flights.empty:
     st.warning("Brak lotów w bazie.")
     st.stop()
 
-# Lista rozwijana: "LO001 | Warszawa -> Berlin"
 lot_options = {}
 for index, row in df_flights.iterrows():
-    # Bezpieczne pobieranie trasy (jeśli nie ma pola Trasa_Info, użyj pustego)
     trasa = row.get('Trasa_Info', row.get('Trasa', ''))
     label = f"{row['NumerLotu']} | {trasa} ({row['DataOdlotu']})"
     lot_options[label] = row['LotID']
@@ -42,9 +40,9 @@ with col_left:
             emp = c['PracownikRef']
             flat_data.append({
                 "Rola": c['RolaWLocie'],
-                "Imię": emp.get('Imie', ''),       # Używamy .get() dla bezpieczeństwa
+                "Imię": emp.get('Imie', ''),       
                 "Nazwisko": emp.get('Nazwisko', ''),
-                "Stanowisko": emp.get('Stanowisko', 'Pracownik') # Bezpieczne pobranie
+                "Stanowisko": emp.get('Stanowisko', 'Pracownik') 
             })
         st.dataframe(pd.DataFrame(flat_data), use_container_width=True)
     else:
@@ -60,7 +58,7 @@ with col_right:
         for e in employees:
             imie = e.get('Imie', '')
             nazwisko = e.get('Nazwisko', '')
-            stanowisko = e.get('Stanowisko', 'Pracownik') # Jeśli brak, wpisz 'Pracownik'
+            stanowisko = e.get('Stanowisko', 'Pracownik')
             pracownik_id = e['PracownikID']
             
             label = f"{imie} {nazwisko} ({stanowisko})"
@@ -72,7 +70,7 @@ with col_right:
             
             role = st.selectbox("Rola w locie:", ["Kapitan", "Drugi Pilot", "Szef Pokładu", "Stewardesa", "Steward"])
             
-            if st.form_submit_button("➕ Przypisz"):
+            if st.form_submit_button("Przypisz"):
                 payload = {
                     "lot_id": selected_lot_id,
                     "pracownik_id": selected_emp_id,

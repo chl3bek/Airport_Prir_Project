@@ -1,6 +1,4 @@
--- Utworzenie Schematu Lotniska (Opcjonalne, zależy od silnika bazy danych)
--- CREATE SCHEMA Lotnisko;
--- SET search_path TO Lotnisko;
+
 
 -- Tabela 1: Modele Samolotów (Przechowuje specyfikację)
 CREATE TABLE ModeleSamolotow (
@@ -22,7 +20,7 @@ CREATE TABLE Samoloty (
 
 -- Tabela 3: Lotniska (Miejsca odlotu/przylotu)
 CREATE TABLE Lotniska (
-    KodLotniska CHAR(3) PRIMARY KEY, -- Np. "WAW", "JFK"
+    KodLotniska CHAR(3) PRIMARY KEY, 
     Nazwa VARCHAR(100) NOT NULL,
     Miasto VARCHAR(100),
     Kraj VARCHAR(100)
@@ -35,13 +33,13 @@ CREATE TABLE Trasy (
     LotniskoPrzylotu CHAR(3) NOT NULL,
     FOREIGN KEY (LotniskoOdlotu) REFERENCES Lotniska(KodLotniska),
     FOREIGN KEY (LotniskoPrzylotu) REFERENCES Lotniska(KodLotniska),
-    UNIQUE (LotniskoOdlotu, LotniskoPrzylotu) -- Trasa jest unikalna dla pary lotnisk
+    UNIQUE (LotniskoOdlotu, LotniskoPrzylotu) 
 );
 
 -- Tabela 5: Statusy Lotów (Lista możliwych statusów)
 CREATE TABLE StatusyLotow (
     StatusID INT PRIMARY KEY,
-    OpisStatusu VARCHAR(50) UNIQUE NOT NULL -- Np. "Planowany", "Opóźniony", "Wylądował"
+    OpisStatusu VARCHAR(50) UNIQUE NOT NULL 
 );
 
 -- Tabela 6: Loty (Główna tabela z informacjami o konkretnym locie)
@@ -78,7 +76,7 @@ CREATE TABLE Rezerwacje (
     DataRezerwacji DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (LotID) REFERENCES Loty(LotID),
     FOREIGN KEY (PasazerID) REFERENCES Pasazerowie(PasazerID),
-    UNIQUE (LotID, PasazerID) -- Pasażer może mieć tylko jedną rezerwację na dany lot
+    UNIQUE (LotID, PasazerID) 
 );
 
 -- Tabela 9: Typy Pracowników (Pilot, Personel Naziemny, Kontroler itp.)
@@ -94,7 +92,7 @@ CREATE TABLE Pracownicy (
     Nazwisko VARCHAR(50) NOT NULL,
     TypID INT NOT NULL,
     DataZatrudnienia DATE NOT NULL,
-    NumerLicencji VARCHAR(50) UNIQUE, -- Dla Pilotów, Kontrolerów
+    NumerLicencji VARCHAR(50) UNIQUE, 
     FOREIGN KEY (TypID) REFERENCES TypyPracownikow(TypID)
 );
 
@@ -103,7 +101,7 @@ CREATE TABLE ZalogaLotu (
     ZalogaLotuID INT PRIMARY KEY,
     LotID INT NOT NULL,
     PracownikID INT NOT NULL,
-    RolaWLocie VARCHAR(50), -- Np. "Kapitan", "Drugi Pilot", "Stewardesa"
+    RolaWLocie VARCHAR(50), 
     FOREIGN KEY (LotID) REFERENCES Loty(LotID),
     FOREIGN KEY (PracownikID) REFERENCES Pracownicy(PracownikID),
     UNIQUE (LotID, PracownikID)
@@ -124,7 +122,7 @@ CREATE TABLE MaszynyObslugiNaziemnej (
     Marka VARCHAR(50),
     Model VARCHAR(50),
     RokProdukcji INT,
-    Status VARCHAR(50) DEFAULT 'Dostępna', -- Np. "Dostępna", "W Użyciu", "W Naprawie"
+    Status VARCHAR(50) DEFAULT 'Dostępna', 
     FOREIGN KEY (TypMaszynyID) REFERENCES TypyMaszyn(TypMaszynyID)
 );
 
@@ -134,8 +132,8 @@ CREATE TABLE PrzegladyTechniczne (
     MaszynaID INT NOT NULL,
     DataPrzegladu DATE NOT NULL,
     DataNastepnegoPrzegladu DATE,
-    Wynik VARCHAR(100) NOT NULL, -- Np. "Pozytywny", "Wymaga Naprawy"
-    PrzeprowadzajacyPracownikID INT, -- Pracownik odpowiedzialny za przegląd
+    Wynik VARCHAR(100) NOT NULL, 
+    PrzeprowadzajacyPracownikID INT, 
     FOREIGN KEY (MaszynaID) REFERENCES MaszynyObslugiNaziemnej(MaszynaID),
     FOREIGN KEY (PrzeprowadzajacyPracownikID) REFERENCES Pracownicy(PracownikID)
 );
