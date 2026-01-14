@@ -352,7 +352,7 @@ INSERT INTO StatusyLotow (StatusID, OpisStatusu) VALUES
 
 -- 6. Loty (300 wierszy)
 INSERT INTO Loty (LotID, NumerLotu, TrasaID, SamolotID, DataOdlotu, PlanowanaDataPrzylotu, RzeczywistaDataOdlotu, RzeczywistaDataPrzylotu, StatusID) VALUES
-(1001, 'LO001', 1, 106, '2025-12-05 08:00:00', '2025-12-05 16:30:00', NULL, NULL, 1),
+(1001, 'LO001', 1, 10, '2025-12-05 08:00:00', '2025-12-05 16:30:00', NULL, NULL, 1),
 (1002, 'LO002', 1, 3, '2025-12-01 12:00:00', '2025-12-01 20:30:00', '2025-12-01 12:05:00', '2025-12-01 20:40:00', 4),
 (1003, 'LO003', 2, 15, '2025-12-01 07:00:00', '2025-12-01 08:30:00', '2025-12-01 07:10:00', '2025-12-01 08:45:00', 4),
 (1004, 'LO004', 3, 22, '2025-12-01 09:00:00', '2025-12-01 11:15:00', '2025-12-01 09:00:00', '2025-12-01 11:10:00', 4),
