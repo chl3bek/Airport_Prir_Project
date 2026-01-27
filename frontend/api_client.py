@@ -61,3 +61,14 @@ def assign_crew(payload):
 
 def get_technical_reviews():
     return fetch_data("machines/reviews")
+
+def get_analytics_passengers():
+    """Pobiera daty urodzenia pasażerów do analizy statystycznej."""
+    return fetch_data("analytics/passengers")
+
+def get_analytics_reviews():
+    """Pobiera dane o przeglądach do analizy cykli serwisowych."""
+    return fetch_data("analytics/reviews")
+def get_analytics_flights():
+    """Pobiera dane o statusach i datach lotów do analizy."""
+    return fetch_data("analytics/flights")

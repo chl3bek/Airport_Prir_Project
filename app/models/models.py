@@ -50,14 +50,16 @@ class FlightStatus(Base):
 class Flight(Base):
     __tablename__ = "Loty"
     LotID: Mapped[int] = mapped_column(Integer, primary_key=True)
-    NumerLotu: Mapped[str] = mapped_column(String(10))
+    NumerLotu: Mapped[str] = mapped_column(String(10), index=True) 
     TrasaID: Mapped[int] = mapped_column(ForeignKey("Trasy.TrasaID"))
     SamolotID: Mapped[int] = mapped_column(ForeignKey("Samoloty.SamolotID"))
-    StatusID: Mapped[int] = mapped_column(ForeignKey("StatusyLotow.StatusID"))
+    
     DataOdlotu: Mapped[datetime] = mapped_column(DateTime)
     PlanowanaDataPrzylotu: Mapped[datetime] = mapped_column(DateTime)
     RzeczywistaDataOdlotu: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
     RzeczywistaDataPrzylotu: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
+
+    StatusID: Mapped[int] = mapped_column(ForeignKey("StatusyLotow.StatusID"))
 
     Trasa: Mapped["Route"] = relationship("Route")
     Samolot: Mapped["Aircraft"] = relationship("Aircraft")
